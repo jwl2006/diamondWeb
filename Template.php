@@ -9,6 +9,7 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><?php echo $title; ?></title>
         <link rel="stylesheet" type="text/css" href="styles/stylesheet.css"/>
+        <script src="./javascript/firework.js"></script>
     </head> 
     <body>
         <div id="wrapper">
@@ -35,9 +36,7 @@ and open the template in the editor.
                 <?php if(isset($sidePicture)) echo $sidePicture;?>
             </div>
             
-            <script>
-                
-            </script>
+        
             
             
             <footer>

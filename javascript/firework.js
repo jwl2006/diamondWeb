@@ -6,7 +6,9 @@
 
 
 
-            var bits = 80; // how many bits
+            /* global boddie */
+
+var bits = 80; // how many bits
             var speed = 66; // how fast - smaller is faster
             var colours = new Array("#03f", "#f03", "#0e0", "#93f", "#0cf", "#f93", "#f0c"); 
             //                     blue    red     green   purple  cyan    orange  pink
@@ -27,6 +29,7 @@
             boddie.style.height = "1px";
             boddie.style.backgroundColor = "transparent";
             document.body.appendChild(boddie);
+            
             function write_fire(xpos, ypos) {
               for (var i = 0; i < bits; i++) {
                 stars[i] = createDiv('*', 13);

@@ -77,7 +77,7 @@ class CoffeeController
         return false;
     }
     
-    function getRegCheck($name) {
+    function regCheckUserName($name) {
         $feedback = '';
         if(isset($name) && trim($name) != '') {
             if($this->checkUserName($name)) {
@@ -89,6 +89,19 @@ class CoffeeController
         }
     }
 
+    
+    function regCheckProductName($name) {
+        $feedback = '';
+        if(isset($name) && trim($name) != '') {
+            if($this->checkProductName($name)) {
+                 $feedback = "<b>$name</b> is Valid!";
+            } else {
+                $feedback = " Not valid";
+            }
+        return $feedback;
+        }
+    }
+    
     function readCSV($filename)
     {
         $file = fopen($filename,'r');

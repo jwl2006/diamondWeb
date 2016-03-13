@@ -7,12 +7,12 @@ $title = "Test Reg Exp Function";
 
 $userfeedback = '';
 if (isset($_POST['seller'])) {
-    $userfeedback =  $coffeeController->getRegCheck($_POST['seller']);
+    $userfeedback =  $coffeeController->regCheckUserName($_POST['seller']);
 }
 
 $productfeedback='';
 if (isset($_POST['product'])) {
-    $productfeedback = $coffeeController->getRegCheck($_POST['product']);
+    $productfeedback = $coffeeController->regCheckProductName($_POST['product']);
 }
 
 

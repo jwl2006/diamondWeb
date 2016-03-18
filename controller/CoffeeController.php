@@ -61,9 +61,8 @@ class CoffeeController
         }
         return $result;
     }
-    
-     public function checkUserName($userName) {   
-         
+   
+     public function checkUserName($userName) {    
         if(preg_match("/^[^0-9][a-z A-Z0-9]{1,15}$/", $userName)) {
                 return true;
             }
@@ -71,7 +70,7 @@ class CoffeeController
     }
     
     public function checkProductName($productName) {
-        if(preg_match("/^[^0-9][^\~\!\@\#\$\%\^\&\*\(\)\`\"]{1,200}$/", $productName)) {
+        if(preg_match("/^[^0-9][^\~\!\@\#\$\%\^\&\*\(\)\`\"]{1,16}$/", $productName)) {
             return true;
         }
         return false;
@@ -88,6 +87,7 @@ class CoffeeController
         return $feedback;
         }
     }
+
 
     
     function regCheckProductName($name) {

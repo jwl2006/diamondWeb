@@ -37,13 +37,7 @@ body p
     padding: 10px;
 }
 
-#content_area form label{
-    color: #B4886B;
-    font-weight: bold;
-    display: block;
-    width: 150px;
-    float: left;
-}
+
 
 #sidebar
 {
@@ -156,18 +150,14 @@ footer
     width: 150px;
 }
 
+
 .inputField
 {
     width: 280px;
     padding: 4px;
 }
 
-label
-{
-    float: left;
-    width: 200px;
-    font-weight: bold;
-}
+
 
 .overViewTable
 {
@@ -184,5 +174,7 @@ label
     padding: 4px;
     border: 1px solid #E3E3E3;
 }
+
+
 
 

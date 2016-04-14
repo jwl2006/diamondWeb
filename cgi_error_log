@@ -1,0 +1,52 @@
+20160303T163942: ezlatemart.com/diamond/Coffee.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Coffee.php on line 3
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Coffee.php on line 3
+
+20160303T163950: ezlatemart.com/diamond/Seller.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+
+20160303T202534: ezlatemart.com/diamond/Seller.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+
+20160303T203034: ezlatemart.com/diamond/Diamond.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Diamond.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Diamond.php on line 2
+
+20160303T203043: ezlatemart.com/diamond/Seller.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+
+20160303T221409: www.ezlatemart.com/Diamond/Diamond.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/Diamond/Diamond.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/Diamond/Diamond.php on line 2
+
+20160303T221421: www.ezlatemart.com/diamond/Seller.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+
+20160303T221540: www.ezlatemart.com/diamond/Diamond.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Diamond.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Diamond.php on line 2
+
+20160303T233950: www.ezlatemart.com/diamond/CoffeeAdd.php
+PHP Warning:  require(./Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/CoffeeAdd.php on line 2
+PHP Fatal error:  require(): Failed opening required './Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/CoffeeAdd.php on line 2
+
+20160304T123842: www.ezlatemart.com/diamond/Seller.php
+PHP Warning:  require(Controller/CoffeeController.php): failed to open stream: No such file or directory in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+PHP Fatal error:  require(): Failed opening required 'Controller/CoffeeController.php' (include_path='.:/usr/local/lib/php-5.5.22-amd64/lib/php') in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/Seller.php on line 2
+
+20160318T032540: ezlatemart.com/diamond/userlogin.php
+PHP Warning:  session_start(): open(/var/php_sessions/sess_64413d1f04523a3f3064819cda3f20db, O_RDWR) failed: No such file or directory (2) in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/userlogin.php on line 2
+PHP Warning:  Unknown: open(/var/php_sessions/sess_64413d1f04523a3f3064819cda3f20db, O_RDWR) failed: No such file or directory (2) in Unknown on line 0
+PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/php_
+20160318T032549: ezlatemart.com/diamond/userlogin.php
+PHP Warning:  session_start(): open(/var/php_sessions/sess_64413d1f04523a3f3064819cda3f20db, O_RDWR) failed: No such file or directory (2) in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/userlogin.php on line 2
+PHP Warning:  Cannot modify header information - headers already sent by (output started at /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/controller/CoffeeController.php:2) in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/controller/loginControl.php on line 32
+PHP Warning:  Unknown
+20160318T032607: ezlatemart.com/diamond/userlogin.php
+PHP Warning:  session_start(): open(/var/php_sessions/sess_64413d1f04523a3f3064819cda3f20db, O_RDWR) failed: No such file or directory (2) in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/userlogin.php on line 2
+PHP Warning:  Cannot modify header information - headers already sent by (output started at /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/controller/CoffeeController.php:2) in /hermes/bosnaweb05a/b2673/ipg.ezlatemartcom/diamond/controller/loginControl.php on line 32
+PHP Warning:  Unknown

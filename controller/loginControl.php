@@ -1,5 +1,7 @@
 <?php
 require 'CoffeeController.php';
+require_once 'Model/BuyerModel.php';
+
 class loginControl {
    private $message = array(),
            $_isLoggedIn = False,
@@ -9,15 +11,17 @@ class loginControl {
     function validate($username, $password) {
            $this->checkRequired($username,'UserName');
            $this->checkRequired($password,'Password');
-       
+          
            $this->checkLength($username,'UserName');
-           $this->checkLength($password,'Password');   
+           $this->checkLength($password,'Password'); 
+        
            
            $this->isValidEmail($username, 'UserName');
-       
+      
            $this->checkFile($username, $password,"./DataSource/userlogin.csv");
-                     
-           if(empty($this->getError())) {
+           
+           $error_msg = $this->getError();
+           if(empty($error_msg)) {
                 $this->_isLoggedIn = true;
                 $this->_userName = $username;
                 $this->_password = $password;
@@ -28,14 +32,58 @@ class loginControl {
             }
     }
     
+    function signUpValidate($user, $password, $confirmpasswd, 
+                            $firstname, $lastname, $address, 
+                            $homephone, $cellphone) {
+        
+            $this->checkLength($user, $UserName);
+            $this->checkLength($password,'Password');
+            $this->checkLength($confirmpasswd,'Password');
+            
+            $this->isValidEmail($username, 'UserName');
+            $this->matchPassword($password, $confirmpasswd);
+            
+            $this->isNotInDb($username);
+            
+            $error_msg = $this->getError();
+            
+            if(empty($error_msg)) {
+               //put the data in the data base
+                $buyerModel = new BuyerModel();
+                $saveStatus = $buyerModel->saveBuyerInDB($user, 
+                        $password, $firstname, $lastname, 
+                        $address, $homephone, $cellphone);
+                if($saveStatus) {
+                    return "<p> Congratulations, register success! Please Login.";
+                }
+            } else {
+                foreach($this->message as $e) {
+                    return "<p>Errors:{$e}</p>";
+                }
+            }
+    }
+    
+    function isNotInDb ($username) {
+        $buyerModel = new BuyerModel();
+        if (!$buyerModel->checkInDb($username)) {
+            return true;
+        } else {
+            $this->addError("Try another email.");
+            return false;
+        }
+    }
+    
+    
     function redirectTo($location = null) {
-        header('Location: ' . $location);
-	exit();
+        exit(header('Location:' . $location));	
     }
     
     function isLoggedin() {
         return $this->_isLoggedIn;
     }
+    
+  
+    
     
     function searchUserInfo($user,$filename) {
         $result = array();
@@ -83,6 +131,12 @@ class loginControl {
         } 
     }
     
+    function matchPassword($firstpwd, $secondowd) {
+         if ($firstpwd != $secondowd) {
+             $this->addError("Please make sure password match.");
+         }    
+    }
+    
     function getError() {
        return $this->message;
     }
@@ -93,7 +147,8 @@ class loginControl {
     }
    
     function checkRequired($value, $msg) {
-        if(empty(trim($value))) {
+        $value_trim = trim($value);
+        if(empty($value_trim)) {
            $this->addError("$msg is required!");
         }
     }

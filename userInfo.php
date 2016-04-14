@@ -1,7 +1,7 @@
 <?php
 session_start();
 require './controller/loginControl.php';
-$content = "data got: ";
+
 $login = new loginControl();
 if(isset( $_SESSION['user'])) {
     $user= $_SESSION['user']; 

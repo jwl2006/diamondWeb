@@ -26,6 +26,12 @@ $content .="
                 <label for='password'>Password</label>
 		<input type='password' name='password' placeholder='password' required>
                 <button type='submit' class='pure-button pure-button-primary'>Sign in</button>
+                <div class = 'footer'>
+                 Don’t have an account?
+                    <span class='signup-today'>
+                    <a href='/signUp' class='track-event'>Sign Up</a>
+                    </span>
+                </div>
          </form>";
 
 

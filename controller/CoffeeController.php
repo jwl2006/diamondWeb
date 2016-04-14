@@ -1,6 +1,5 @@
-
 <?php
-
+require 'Model/BuyerModel.php';
 class CoffeeController
 {       
    function SellerTable($filename)
@@ -112,5 +111,49 @@ class CoffeeController
         fclose($file);
         return $line;
     }
+    
+    
+    function CreateBuyerTable($username)
+    {
+        $buyerModel = new BuyerModel();
+        $buyer= $buyerModel->GetBuyerByName($username);
+        $result = "";
+        
+        //Generate a coffeeTable for each coffeeEntity in array
+        $result .= 
+              "<table class = 'pure-table'>            
+                        <tr>
+                            <th>First Name: </th>
+                            <td>$buyer->firstname</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Last Name: </th>
+                            <td>$buyer->lastname</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Email: </th>
+                            <td>$buyer->email</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Address: </th>
+                            <td>$buyer->address</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Home Phone: </th>
+                            <td>$buyer->home_phone</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>Cell Phone: </th>
+                            <td>$buyer->cell_phone</td>
+                        </tr>        
+                </table>"; 
+         return $result;
+        }        
+     
 }
-
+?>

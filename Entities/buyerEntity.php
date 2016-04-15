@@ -9,9 +9,9 @@ class buyerEntity{
             $home_phone,
             $cell_phone,
             $password;
-  
+
     
-    function __construct($id='', $email, $password,$firstname, $lastname, $address='', $home_phone='', $cell_phone) {
+    function __construct($id='', $firstname, $lastname, $email, $address='', $home_phone='', $cell_phone, $password) {
         $this->id =$id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;

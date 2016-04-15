@@ -6,19 +6,18 @@ class loginControl {
    private $message = array(),
            $_isLoggedIn = False,
            $_userName,
+           $_isSignedUp = False,
            $_password;
        
     function validate($username, $password) {
-           $this->checkRequired($username,'UserName');
-           $this->checkRequired($password,'Password');
-          
+         
            $this->checkLength($username,'UserName');
            $this->checkLength($password,'Password'); 
         
            
            $this->isValidEmail($username, 'UserName');
       
-           $this->checkFile($username, $password,"./DataSource/userlogin.csv");
+           $this->authentication($username, $password);
            
            $error_msg = $this->getError();
            if(empty($error_msg)) {
@@ -32,35 +31,53 @@ class loginControl {
             }
     }
     
-    function signUpValidate($user, $password, $confirmpasswd, 
+    function authentication($username, $password) {
+        $buyerModel = new BuyerModel();
+        if (!$buyerModel->isauthenticated($username, sha1($password))) {
+            $this->addError("User Not registered!");
+            return false;
+        } 
+            return true;  
+    }
+    
+    function signUpValidate($userName, $password, $confirmpasswd, 
                             $firstname, $lastname, $address, 
                             $homephone, $cellphone) {
         
-            $this->checkLength($user, $UserName);
+            $this->checkLength($userName, 'UserName');
             $this->checkLength($password,'Password');
             $this->checkLength($confirmpasswd,'Password');
             
-            $this->isValidEmail($username, 'UserName');
+            $this->isValidEmail($userName, 'UserName');
+        
             $this->matchPassword($password, $confirmpasswd);
             
-            $this->isNotInDb($username);
+            $this->isNotInDb($userName);
+           
             
             $error_msg = $this->getError();
             
             if(empty($error_msg)) {
                //put the data in the data base
-                $buyerModel = new BuyerModel();
-                $saveStatus = $buyerModel->saveBuyerInDB($user, 
-                        $password, $firstname, $lastname, 
-                        $address, $homephone, $cellphone);
+              
+              
+                $saveStatus = $this->saveBuyer($userName, sha1($password), $firstname, $lastname, $address, $homephone, $cellphone);
+                
                 if($saveStatus) {
-                    return "<p> Congratulations, register success! Please Login.";
+                    $this->_isSignedUp = true;
+                    return "Register success, Congratulations! Please log in.";
                 }
             } else {
                 foreach($this->message as $e) {
                     return "<p>Errors:{$e}</p>";
                 }
             }
+    }
+    
+    function saveBuyer($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone) {
+       
+        $buyerModel = new BuyerModel();
+        return $buyerModel->saveBuyerInDB($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone); 
     }
     
     function isNotInDb ($username) {
@@ -74,15 +91,17 @@ class loginControl {
     }
     
     
-    function redirectTo($location = null) {
-        exit(header('Location:' . $location));	
+    function redirectTo($location = null,$time) {
+        header("refresh:" . $time . ";url=".$location);	
     }
     
     function isLoggedin() {
         return $this->_isLoggedIn;
     }
     
-  
+    function isSignedUp() {
+        return $this->_isSignedUp;
+    }
     
     
     function searchUserInfo($user,$filename) {

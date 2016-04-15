@@ -13,7 +13,7 @@ if(isset($_POST['user']) || isset($_POST['password'])) {
        
         if($login->isLoggedin()) {
             $_SESSION['user'] = $user;  
-            $login->redirectTo('userInfo.php');
+            $login->redirectTo('Buyer.php','0');
         }
 }
 
@@ -29,7 +29,7 @@ $content .="
                 <div class = 'footer'>
                  Don’t have an account?
                     <span class='signup-today'>
-                    <a href='/signUp' class='track-event'>Sign Up</a>
+                    <a href='signUp.php' class='track-event'>Sign Up</a>
                     </span>
                 </div>
          </form>";

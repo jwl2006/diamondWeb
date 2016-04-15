@@ -23,7 +23,7 @@ and open the template in the editor.
                     <li><a href="Diamond.php">Diamond</a></li>
                     <li><a href="Seller.php">Sellers</a></li>
                     <li><a href="News.php">News</a></li>
-                    <li><a href="Management.php">Management</a></li>
+                    <li><a href="userlogin.php">Account</a></li>
                 </ul>
             </nav>
             <div>

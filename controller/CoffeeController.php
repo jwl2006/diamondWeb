@@ -119,39 +119,52 @@ class CoffeeController
         $buyer= $buyerModel->GetBuyerByName($username);
         $result = "";
         
+        
+        
+        $firstname = $buyer->getFirstname();
+        $lastname = $buyer->getLastname();
+        $email = $buyer->getEmail();
+        $address = $buyer->getAddress();
+        $homephone = $buyer->getHome_phone();
+        $cellphone = $buyer->getCell_phone();
+        
+      
+        
         //Generate a coffeeTable for each coffeeEntity in array
+        if ($buyer != NULL) {
         $result .= 
               "<table class = 'pure-table'>            
                         <tr>
                             <th>First Name: </th>
-                            <td>$buyer->firstname</td>
+                            <td>$firstname</td>
                         </tr>
                         
                         <tr>
                             <th>Last Name: </th>
-                            <td>$buyer->lastname</td>
+                            <td>$lastname</td>
                         </tr>
                         
                         <tr>
                             <th>Email: </th>
-                            <td>$buyer->email</td>
+                            <td>$email</td>
                         </tr>
                         
                         <tr>
                             <th>Address: </th>
-                            <td>$buyer->address</td>
+                            <td>$address</td>
                         </tr>
                         
                         <tr>
                             <th>Home Phone: </th>
-                            <td>$buyer->home_phone</td>
+                            <td>$homephone</td>
                         </tr>
                         
                         <tr>
                             <th>Cell Phone: </th>
-                            <td>$buyer->cell_phone</td>
+                            <td>$cellphone</td>
                         </tr>        
                 </table>"; 
+        }
          return $result;
         }        
      

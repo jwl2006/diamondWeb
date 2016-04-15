@@ -36,10 +36,15 @@ if(isset($_POST['user']) || isset($_POST['password'])||
     
     $content .= $login->signUpValidate($user, $password, $confirmpasswd, 
                         $firstname, $lastname, $address, $homephone, $cellphone);
+    if($login->isSignedUp()) {
+        $login->redirectTo("userlogin.php", "3");
+        unset($_SESSION['user']);
+    }
+   
 }
 
 $content .="
-         <form action='' method='post' class='pure-form pure-form-stacked'>
+         <form action='' method='post'  class='pure-form pure-form-stacked'>
 		<label  for='user'>Create Username*</label>
 		<input type='text' name='user' placeholder='yourname@email.com' required>
                 <label for='password'>Create Password*</label>

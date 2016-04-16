@@ -9,12 +9,18 @@ class BuyerModel {
     //put your code here
     function GetBuyerByName($username) {
 
+        require 'Credentials.php';
+
+        //open connection and select databases
+        mysql_connect($host, $user, $passwd) or die(mysql_error());
+        mysql_select_db($database);
+
         $username = mysql_real_escape_string($username);     
         $query = "SELECT * FROM buyer WHERE email LIKE '$username'";
+        $result = mysql_query($query) or die(mysql_error());
+  
         
-        $result = $this->readEntryFromDb($query);
-       
-
+      
         
         if ($row = mysql_fetch_array($result)) {
             $firstname = $row[1];
@@ -29,15 +35,23 @@ class BuyerModel {
       
         
             $buyer = new buyerEntity(-1, $firstname, $lastname, $email, $address, $home_phone, $cell_phone, $passwd);
+             mysql_close();
             return $buyer;
         }
-       
+        mysql_close();
         return NULL;
     }
     function isauthenticated($username, $password) {
+          require 'Credentials.php';
+
+        //open connection and select databases
+        mysql_connect($host, $user, $passwd) or die(mysql_error());
+        mysql_select_db($database);
+
         $query = "SELECT * FROM buyer WHERE email LIKE '$username' and password LIKE '$password'";
-        $result = $this->readEntryFromDb($query);
-     
+       
+        $result = mysql_query($query) or die(mysql_error());
+        mysql_close();
         if(mysql_num_rows($result) > 0) {
             return true;
         }
@@ -57,11 +71,19 @@ class BuyerModel {
     }
     
     function checkInDb($value) {
+          require 'Credentials.php';
+
+        //open connection and select databases
+        mysql_connect($host, $user, $passwd) or die(mysql_error());
+        mysql_select_db($database);
+       
         $value = mysql_real_escape_string($value);
         $query = "SELECT email FROM buyer WHERE email LIKE '$value'";
-        $result = $this->readEntryFromDb($query);
+        $result = mysql_query($query) or die(mysql_error());
 
-        if(mysql_num_rows($result) > 0) { 
+        mysql_close();
+
+        if(mysql_num_rows($result) > 0) {       
             return true;
         } 
         return false;
@@ -69,6 +91,8 @@ class BuyerModel {
     
     function saveBuyerInDB($email, $secret, $firstname, $lastname, $address, $homephone, $cellphone) {
         require 'Credentials.php';
+        mysql_connect($host, $user, $passwd) or die(mysql_error());
+        mysql_select_db($database);
         
         $id = 'NULL';
         $id = mysql_real_escape_string($id);
@@ -81,8 +105,7 @@ class BuyerModel {
         $cellphone = mysql_real_escape_string($cellphone);
         
         //open connection and select databases
-        mysql_connect($host, $user, $passwd) or die(mysql_error());
-        mysql_select_db($database);
+        
        
         
         $query = "INSERT INTO buyer (id, firstname, lastname, email, address, home_phone, cell_phone, password) 

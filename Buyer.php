@@ -14,10 +14,17 @@ if(isset( $_SESSION['user'])) {
     $username = $_SESSION['user'];
     $buyerTable = $coffeeController->CreateBuyerTable($username);
     $content .= $buyerTable;
+//    $login->redirectTo('Diamond.php','0');
+    $content .= "<a href='userlogout.php'><button class='pure-button pure-button-primary'>Log Out</button></a>";
+
+    $orderhistory = $coffeeController->findOrderHistory($username);
+    $content .= $orderhistory;
+    
 } else {
-    $login->redirectTo('401.php');
+    $login->redirectTo('401.php','0');
 }
 
+$content .= "<a href='Diamond.php'><button class='pure-button pure-button-primary'>Order</button></a>";
 
 
 include 'Template.php';

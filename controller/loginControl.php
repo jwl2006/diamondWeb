@@ -7,7 +7,10 @@ class loginControl {
            $_isLoggedIn = False,
            $_userName,
            $_isSignedUp = False,
-           $_password;
+           $_password,
+           $_productAdded = False,
+           $_transactionAdded = False;
+       
        
     function validate($username, $password) {
          
@@ -40,9 +43,69 @@ class loginControl {
             return true;  
     }
     
+    function productValidate($productname, $price, $weight, $category, $introduction, $seller) {
+        
+        $this->checkRequired($productname,"productname");
+        $this->checkRequired($price, "price");
+        $this->checkRequired($weight, "weight");
+        $this->checkRequired($category, "category");
+        
+         if(empty($error_msg)) {
+           
+             $buyerModel = new BuyerModel();
+             $saveProduct = $buyerModel->saveProductInDB($productname, $price, $weight, $category, $introduction, $seller);
+             
+             if($saveProduct) {
+               
+                 $this->_productAdded = true;
+                 return "Congrats, your product is posted!";
+             }   
+         }  else {
+                foreach($this->message as $e) {
+                    return "<p>Errors:{$e}</p>";
+                }
+        }
+    }
+    function checkRequired($entry, $msg) {
+        if(!empty($entry)) {
+            return true;
+        } else {
+            $this->addError($msg + "is required.");
+            return false;
+        }
+    }
+    
+    function transactionValidate($productid, $quantity, $time, $buyer, $seller) {
+         
+         $this->checkRequired($productid, "productId");
+         $this->checkRequired($quantity, "quantity");
+         
+         $error_msg = $this->getError();
+         
+        if(empty($error_msg)) { 
+            $buyerModel = new BuyerModel();
+            $saveStatus = $buyerModel->saveTransaction($productid, $quantity, $time, $buyer, $seller);
+          
+            
+            if($saveStatus) {
+                 $this->_transactionAdded = true;
+                 return "Congrats, order completed!"; 
+            }
+        } else {
+                foreach($this->message as $e) {
+                    return "<p>Errors:{$e}</p>";
+                }
+            }
+    }
+    
+   
+    function isProductAdded (){
+        return $this->_productAdded;
+    }
+    
     function signUpValidate($userName, $password, $confirmpasswd, 
                             $firstname, $lastname, $address, 
-                            $homephone, $cellphone) {
+                            $homephone, $cellphone, $identity) {
         
             $this->checkLength($userName, 'UserName');
             $this->checkLength($password,'Password');
@@ -54,14 +117,14 @@ class loginControl {
             
             $this->isNotInDb($userName);
            
-            
+            $this->checkIdentity($identity);
             $error_msg = $this->getError();
             
             if(empty($error_msg)) {
                //put the data in the data base
               
               
-                $saveStatus = $this->saveBuyer($userName, sha1($password), $firstname, $lastname, $address, $homephone, $cellphone);
+                $saveStatus = $this->saveBuyer($userName, sha1($password), $firstname, $lastname, $address, $homephone, $cellphone, $identity);
                 
                 if($saveStatus) {
                     $this->_isSignedUp = true;
@@ -74,10 +137,18 @@ class loginControl {
             }
     }
     
-    function saveBuyer($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone) {
+    function checkIdentity($identity) {
+        if ($identity == 'seller' || $identity == 'buyer') {
+            return true;
+        }
+        $this->addError("Please select your identity");
+        return false;
+    }
+ 
+    function saveBuyer($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone, $identity) {
        
         $buyerModel = new BuyerModel();
-        return $buyerModel->saveBuyerInDB($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone); 
+        return $buyerModel->saveBuyerInDB($userName, $password, $firstname, $lastname, $address, $homephone, $cellphone, $identity); 
     }
     
     function isNotInDb ($username) {
@@ -116,7 +187,7 @@ class loginControl {
         return $result;
     }
     
-    public function getUserTable($dataInfo,$filename) {
+   function getUserTable($dataInfo, $filename) {
          $coffee = new CoffeeController();
          $data = $coffee->readCSV($filename);
          $title = $data[0];
@@ -165,12 +236,7 @@ class loginControl {
     //    $this->$errors[] = $error;
     }
    
-    function checkRequired($value, $msg) {
-        $value_trim = trim($value);
-        if(empty($value_trim)) {
-           $this->addError("$msg is required!");
-        }
-    }
+  
 
     function isValidEmail($email, $msg){ 
         if(filter_var($email, FILTER_VALIDATE_EMAIL) !== false) {

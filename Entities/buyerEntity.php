@@ -8,10 +8,11 @@ class buyerEntity{
             $address,
             $home_phone,
             $cell_phone,
-            $password;
+            $password,
+            $identity;
 
     
-    function __construct($id='', $firstname, $lastname, $email, $address='', $home_phone='', $cell_phone, $password) {
+    function __construct($id='', $firstname, $lastname, $email, $address='', $home_phone='', $cell_phone, $password,$identity='') {
         $this->id =$id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -20,6 +21,14 @@ class buyerEntity{
         $this->home_phone = $home_phone;
         $this->cell_phone = $cell_phone;
         $this->password = $password;
+    }
+    
+    function getIdentity() {
+        return $this->identity;
+    }
+
+    function setIdentity($identity) {
+        $this->identity = $identity;
     }
     
     function getId() {

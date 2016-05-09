@@ -1,7 +1,7 @@
 <?php
-    $host = 'ezlatemartcom.ipagemysql.com';
-    $user = 'wanghao313';
-    $passwd = '102012';
+    $host = 'localhost';
+    $user = 'root';
+    $passwd = '';
     $database = 'diamonddb';
    
 

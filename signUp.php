@@ -22,8 +22,8 @@ $content = '';
 
 if(isset($_POST['user']) || isset($_POST['password'])||
         isset($_POST['confirmpasswd']) || isset($_POST['firstname']) ||
-               isset($_POST['lastname']) || isset($_POST['address']) ||
-               isset($_POST['homephone']) || isset($_POST['cellphone'])) {
+               isset($_POST['lastname']) ||
+               isset($_POST['homephone']) || isset($_POST['identity'])) {
     
     $user = trim($_POST['user']);
     $password = trim($_POST['password']);
@@ -33,9 +33,10 @@ if(isset($_POST['user']) || isset($_POST['password'])||
     $address = trim($_POST['address']);
     $homephone = trim($_POST['homephone']);
     $cellphone = trim($_POST['cellphone']);
-    
+    $identity = trim($_POST['identity']);
+ 
     $content .= $login->signUpValidate($user, $password, $confirmpasswd, 
-                        $firstname, $lastname, $address, $homephone, $cellphone);
+                        $firstname, $lastname, $address, $homephone, $cellphone, $identity);
     if($login->isSignedUp()) {
         $login->redirectTo("userlogin.php", "3");
         unset($_SESSION['user']);
@@ -55,6 +56,13 @@ $content .="
                 <div class='userInfo'>
                 <p> Profile Information</p>
                 </div>
+                <lable for='identity'>Select your identity</lable>
+                    <select name='identity'>
+                       <option value=''>--</option>
+                       <option value='seller'>Seller</option>
+                       <option value='buyer'>Buyer</option>     
+                    </select>
+                    
                 
                 <label  for='firstname'>First Name*: </label>
 		<input type='text' name='firstname' placeholder='eg: Lilly' required>
@@ -66,6 +74,8 @@ $content .="
 		<input type='text' name='homephone' placeholder='' >
                 <label for='cellphone'>Cell Phone*: </label>
 		<input type='text' name='cellphone' placeholder='' required >
+
+ 
                 
                 <button type='submit' class='pure-button pure-button-primary'>Sign Up</button>
          </form>";

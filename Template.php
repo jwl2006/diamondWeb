@@ -10,7 +10,7 @@ and open the template in the editor.
         <title><?php echo $title; ?></title>
         <link rel="stylesheet" type="text/css" href="styles/stylesheet.css"/>
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-        <script src="./javascript/firework.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js">></script>
     </head> 
     <body>
         <div id="wrapper">
@@ -21,7 +21,7 @@ and open the template in the editor.
                 <ul id="nav">
                     <li><a href="index.php">Home</a></li>
                     <li><a href="Diamond.php">Diamond</a></li>
-                    <li><a href="Seller.php">Sellers</a></li>
+                    <li><a href="showAllUsers.php">Sellers</a></li>
                     <li><a href="News.php">News</a></li>
                     <li><a href="userlogin.php">Account</a></li>
                 </ul>
@@ -45,4 +45,37 @@ and open the template in the editor.
             </footer>
         </div>
     </body>
+    <script>
+        $(document).ready(function(){
+            $(document).on("click", "#orderButton", function(){
+            console.log("clicked");
+            var $row = $(this).parents(':eq(1)');
+            console.log($row);
+            $tds = $row.find("td");
+            var data = [];
+            $.each($tds, function() {
+                data.push($(this).text());
+            })
+           var $productid = data[6];
+           var $seller = data[4];
+           var param = '?productid='+$productid+'&seller='+$seller;
+           var uri = "/buyTransaction.php"+ param;
+           console.log(uri);
+           $.ajax({
+               type: "POST",
+               url: 'buyTransaction.php',
+               data:{'productid': $productid, 'seller': $seller},
+               success: function(response) {
+                  document.open();
+                  document.write(response);
+                  document.close();
+                  window.location.replace("Buyer.php");
+               }
+               
+           });
+            
+        })
+    })
+        
+    </script>
 </html>

@@ -1,8 +1,10 @@
 <?php
 require 'Model/BuyerModel.php';
+
+
 class CoffeeController
-{       
-   function SellerTable($filename)
+{      
+   function SellerTable()
     {
         $data = $this->readCSV($filename);
         $result = "";
@@ -61,6 +63,123 @@ class CoffeeController
         return $result;
     }
    
+    function findOrderHistory($buyer) {
+        $buyermodel = new BuyerModel();
+        $historyList = $buyermodel->findBuyerHistory($buyer);
+        
+        
+        $result ="<table class = 'pure-table pure-table-horizontal'  >
+                  <caption>Order History</caption>
+                        <thead>    
+                            <tr>
+                                <th>Product Name</td>
+                                <th>Quantity </td>
+                                <th>Time </td>
+                                <th>Seller </td>
+                            </tr>
+                        <thead>
+                        <tbody>";
+         foreach($historyList as $history) {
+              $result .= $this-> buildHistoryTable($history);
+        }
+        $result .= "</tbody>";
+        $result .= "</table>";
+        return $result;      
+    }
+    
+        
+    function buildHistoryTable ($history) {
+               
+                $historyinfo = '';
+                if(!empty($history)) {
+                     
+                    $name = $history->getProductid();
+                    $quantity= $history->getQuantity();
+                    $time = $history->getTime();
+                    $seller = $history->getSeller();
+                    
+                   
+                 
+                    $historyinfo  .= "<tr>
+                                        <td>$name</td>
+                                        <td>$quantity</td>
+                                        <td>$time</td>
+                                        <td>$seller</td>";
+                                      
+                    $historyinfo  .= "</tr>";                
+            }
+        
+        return $historyinfo ;
+    }
+    
+    
+    function showSellerInventory($seller='') {
+        $buyermodel = new BuyerModel();
+        $productList = $buyermodel->findSellerInventory($seller); 
+    
+    
+        $result ="
+            <table id='sellerInventory' class = 'pure-table pure-table-horizontal'  >
+                        <thead>    
+                            <tr>
+                                <th>Product Name</td>
+                                <th>Price </td>
+                                <th>Weight </td>
+                                <th>Category </td>
+                                <th >Seller</td>
+                                <th>Introduction </td>";
+                                
+        if(empty($seller)) {
+            $result .= "<th>Buy </td>";
+        }
+        $result .= "</tr> </thead>";
+        $result .= "<tbody>";
+        foreach($productList as $product) {
+           $result .= $this->buildProductList($product, $seller);
+        }
+        $result .= "</tbody>";
+        $result .= "</table>";
+        $result .= "</form>";
+       
+        return $result;
+        
+                
+    }
+    
+    function buildProductList ($product, $isSellerFlag) {
+               
+                $productinfo = '';
+                if(!empty($product)) {
+                     
+                    $name = $product->getName();
+                    $price = $product->getPrice();
+                    $weight = $product->getWeight();
+                    $category = $product->getCategory();
+                    $seller = $product->getSeller();
+                    $introduction = $product->getIntroduction();
+                    $productID = $product->getId();
+                 
+                    $productinfo .= "<tr>
+                                        <td>$name</td>
+                                        <td>$price</td>
+                                        <td>$weight</td>
+                                        <td>$category</td>
+                                        <td>$seller</td>
+                                        <td>$introduction</td>
+                                        <td style='display:none;'>$productID</td>";
+                                       
+                    if(empty($isSellerFlag)) {   
+                            
+                             $productinfo .= " <td><button id='orderButton' class='pure-button pure-button-primary'>Order Now</button></td>";
+                    }
+                    $productinfo .= "</tr>";
+                                
+            }
+        
+        return $productinfo;
+    }
+ 
+   
      public function checkUserName($userName) {    
         if(preg_match("/^[^0-9][a-z A-Z0-9]{1,15}$/", $userName)) {
                 return true;
@@ -112,58 +231,70 @@ class CoffeeController
         return $line;
     }
     
+    function showAllUsers($identity) {
+       
+        $buyerModel = new BuyerModel();
+        $buyers = $buyerModel->getUserByIdentity($identity);
+        $buyerTable = "";
+        $buyerTable .= "<table class = 'pure-table pure-table-horizontal'  >
+                        <thead>    
+                            <tr>
+                                <th>First Name</td>
+                                <th>Last Name</td>
+                                <th>Email</td>
+                                <th>Address</td>
+                                <th>Home Phone</td>
+                                <th>Cell Phone </td>
+                            </tr>    
+                        </thead>        ";
+        foreach($buyers as $buyer) {
+            $buyerTable .= $this->buildBuyerTable($buyer);
+        }
+         $buyerTable .="</table>";
+        return $buyerTable;
+    }
     
-    function CreateBuyerTable($username)
-    {
+    function CreateBuyerTable($username) {
         $buyerModel = new BuyerModel();
         $buyer= $buyerModel->GetBuyerByName($username);
-        $result = "";
         
-        
-        
+        $result = "<table class = 'pure-table pure-table-horizontal'  >
+                        <thead>    
+                            <tr>
+                                <th>First Name</td>
+                                <th>Last Name</td>
+                                <th>Email</td>
+                                <th>Address</td>
+                                <th>Home Phone</td>
+                                <th>Cell Phone </td>
+                            </tr>    
+                        </thead>        ";
+        $result .= $this->buildBuyerTable($buyer);
+        $result .= "</table>";
+        return $result;
+    }
+    
+    function buildBuyerTable($buyer)
+    {
+        $result = "";        
         $firstname = $buyer->getFirstname();
         $lastname = $buyer->getLastname();
         $email = $buyer->getEmail();
         $address = $buyer->getAddress();
         $homephone = $buyer->getHome_phone();
         $cellphone = $buyer->getCell_phone();
-        
-      
-        
+             
         //Generate a coffeeTable for each coffeeEntity in array
         if ($buyer != NULL) {
         $result .= 
-              "<table class = 'pure-table'>            
-                        <tr>
-                            <th>First Name: </th>
+                        "<tr>   
                             <td>$firstname</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Last Name: </th>
                             <td>$lastname</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Email: </th>
                             <td>$email</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Address: </th>
                             <td>$address</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Home Phone: </th>
                             <td>$homephone</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Cell Phone: </th>
                             <td>$cellphone</td>
-                        </tr>        
-                </table>"; 
+                        </tr>";        
         }
          return $result;
         }        

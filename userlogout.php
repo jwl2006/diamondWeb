@@ -11,5 +11,5 @@ require './controller/loginControl.php';
 
 $login = new loginControl();
 unset($_SESSION['user']);
-$login->redirectTo('userlogin.php');
+$login->redirectTo('userlogin.php', '0');
 include 'Template.php';

@@ -3,13 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/buyTransaction.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/mockBuy.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/sellerHomepage.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Model/BuyerModel.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Diamond.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/signUp.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/controller/CoffeeController.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/cgi_error_log</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/showAllUsers.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/curl.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Template.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Buyer.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/userlogout.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Model/BuyerModel.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/userInfo.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/controller/CoffeeController.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Management.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Model/Credentials.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/controller/loginControl.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/News.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/createInventory.php</file>
             <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/userlogin.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Template.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/testDriver.php</file>
+            <file>file:/Applications/XAMPP/xamppfiles/htdocs/diamond/Seller.php</file>
         </group>
     </open-files>
 </project-private>

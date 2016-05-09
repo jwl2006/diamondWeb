@@ -1,21 +1,35 @@
 <?php
 session_start();
 require './controller/loginControl.php';
+require_once './Model/BuyerModel.php';
 $title = "User Login";
 
 $login = new loginControl();
+$buyermodel = new BuyerModel();
 $content = '';
 
 if(isset($_POST['user']) || isset($_POST['password'])) {
         $user =$_POST['user'];
         $pwd = $_POST['password'];
         $content .= $login->validate($user,$pwd);
-       
+        
         if($login->isLoggedin()) {
-            $_SESSION['user'] = $user;  
-            $login->redirectTo('Buyer.php','0');
+            $_SESSION['user'] = $user; 
+        
+            $identity = $buyermodel->findIdentityInDB($user);
+            
+           
+            if($identity == 'buyer') {
+                $login->redirectTo('Buyer.php','0');
+            } else if($identity == 'seller') {
+                $login->redirectTo('sellerHomepage.php', '0');
+            }
+            } else {
+                 $login->redirectTo('userlogout.php', '0');
+            }
         }
-}
+
+
 
 
 
